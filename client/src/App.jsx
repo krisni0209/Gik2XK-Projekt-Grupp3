@@ -10,7 +10,7 @@ function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link to="/">Hockey Shop</Link>
           </Typography>
-          <Button color="inherit"><Link to="/Product/new">Nya Produkter</Link></Button>
+          <Button color="inherit"><Link to="/Product/new">Produkter</Link></Button>
         </Toolbar>
       </AppBar>
     </Box>
