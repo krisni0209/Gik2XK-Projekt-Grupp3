@@ -1,7 +1,30 @@
 import api from "./api";
 
-export const getAllProducts = () => api.get("/products");
-export const getProductById = (id) => api.get(`/products/${id}`);
-export const createProduct = (data) => api.post("/products", data);
-export const updateProduct = (id, data) => api.put(`/products/${id}`, data);
-export const deleteProduct = (id) => api.delete(`/products/${id}`);
+const ProductService = {
+  getAll: async () => {
+    const res = await api.get("/products");
+    return res.data;
+  },
+
+  getById: async (id) => {
+    const res = await api.get(`/products/${id}`);
+    return res.data;
+  },
+
+  create: async (product) => {
+    const res = await api.post("/products", product);
+    return res.data;
+  },
+
+  update: async (id, product) => {
+    const res = await api.put(`/products/${id}`, product);
+    return res.data;
+  },
+
+  delete: async (id) => {
+    const res = await api.delete(`/products/${id}`);
+    return res.data;
+  },
+};
+
+export default ProductService;

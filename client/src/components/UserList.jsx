@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../services/userService";
-import UserItemSmall from "./UserItemSmall";
- 
+import UserService from "../services/UserService";
+
 function UserList() {
   const [users, setUsers] = useState([]);
- 
+
   useEffect(() => {
-	getAllUsers().then(res => setUsers(res.data));
+    UserService.getAll().then(setUsers);
   }, []);
- 
+
   return (
-	<div>
-  	<h2>Användare</h2>
-  	{users.map(user => (
-    	<UserItemSmall key={user.id} user={user} />
-  	))}
-	</div>
+    <div>
+      <h2>Användare</h2>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>
+            {user.first_name} {user.last_name} – {user.email}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
- 
+
 export default UserList;
 
 
