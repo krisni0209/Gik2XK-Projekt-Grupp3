@@ -1,18 +1,21 @@
 import ProductList from '../components/ProductList';
-
-// Förenklat exempel med statiska produkter
-const products = [
-  { id: 1, title: "Klubba", price: 999, imageUrl: "/img/klubba.jpg" },
-  { id: 2, title: "Hjälm", price: 799, imageUrl: "/img/hjalm.jpg" }
-];
+import { useState } from 'react';
 
 function ProductListView() {
-  return (
-    <div>
-      <h2>Alla produkter</h2>
-      <ProductList products={products} />
-    </div>
-  );
+  const [products, setProducts] = useState([
+    { id: 1, title: 'Hockeyklubba', price: 999, description: 'Proffsklubba' },
+    { id: 2, title: 'Skydd', price: 599, description: 'Axelskydd junior' },
+    { id: 3, title: 'CCM Hjälm', price: 799, description: 'Skyddande hjälm' }
+  ]);
+
+  const handleDelete = (productId) => {
+    const updatedProducts = products.filter(p => p.id !== productId);
+    setProducts(updatedProducts);
+  };
+
+  return <ProductList products={products} onDelete={handleDelete} />;
 }
 
 export default ProductListView;
+
+

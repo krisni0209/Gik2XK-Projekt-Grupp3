@@ -18,14 +18,16 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />, // Det här är den övergripande "föräldern" som håller allt
-    children: [
-      { path: '/', element: <Home /> },
-      { path: '/products', element: <ProductListView /> },
-      { path: '/products/new', element: <ProductEdit /> },
-      { path: '/products/:id', element: <ProductDetail /> },
-      { path: '/cart', element: <ShoppingCartView /> },
-      { path: '*', element: <NotFound /> }, // Hantera alla ogiltiga vägar
-    ],
+          children: [
+        { path: '/', element: <Home /> },
+        { path: '/products', element: <ProductListView /> },
+        { path: '/products/new', element: <ProductEdit /> },
+        { path: '/products/:id', element: <ProductDetail /> },
+        { path: '/products/:id/edit', element: <ProductEdit /> },
+        { path: '/cart', element: <ShoppingCartView /> },
+        { path: '*', element: <NotFound /> }
+      ]
+      ,
   },
 ]);
 

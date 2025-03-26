@@ -7,6 +7,7 @@ function ProductItemSmall({ product }) {
       <img src={product.imageUrl} alt={product.title} />
       <p>{product.price} kr</p>
       <Link to={`/products/${product.id}`}>Visa mer</Link>
+      <Link to={`/products/${product.id}/edit`} className="edit-link">Ändra</Link> {/* Lägg till den här raden */}
     </div>
   );
 }

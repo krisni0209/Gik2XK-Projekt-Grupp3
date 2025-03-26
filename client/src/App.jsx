@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, Routes, Route, Outlet } from 'react-router-dom'; // Keep only one import
 
-// Views (sidkomponenter)
+import ProductList from './components/ProductList';
 import Home from './views/Home';
 import ProductListView from './views/ProductListView';
 import ProductDetail from './views/ProductDetail';
@@ -23,13 +23,16 @@ function App() {
       </header>
 
       <main>
-        {/* Här kan du lägga till den dynamiska rendering av sidkomponenter */}
+        <Outlet /> {/* Här visas barnroutes från main.jsx */}
       </main>
     </div>
   );
 }
 
 export default App;
+
+
+
 
 
 
