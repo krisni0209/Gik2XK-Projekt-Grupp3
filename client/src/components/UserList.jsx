@@ -1,5 +1,15 @@
-function UserList() {
-    return ( <h4>UserList</h4> );
+import UserItemSmall from './UserItemSmall';
+
+function UserList({ users }) {
+  return (
+    <div>
+      {users.map(user => (
+        <UserItemSmall key={user.id} user={user} />
+      ))}
+    </div>
+  );
 }
 
 export default UserList;
+
+

@@ -1,5 +1,11 @@
-function UserItemSmall() {
-    return ( <h4>UserItemSmall</h4> );
-}
-
-export default UserItemSmall;
+function UserItemSmall({ user }) {
+    return (
+      <div className="user-card">
+        <p>{user.first_name} {user.last_name}</p>
+        <p>{user.email}</p>
+      </div>
+    );
+  }
+  
+  export default UserItemSmall;
+  

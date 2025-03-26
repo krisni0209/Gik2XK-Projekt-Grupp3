@@ -1,7 +1,17 @@
+import ProductForm from '../components/ProductForm';
+
 function ProductEdit() {
-    return (
-        <h2> Produkt edit </h2>
-    );
+  const handleSubmit = (formData) => {
+    console.log("Spara produkt:", formData);
+    // TODO: Skicka till backend med fetch/axios
+  };
+
+  return (
+    <div>
+      <h2>Redigera / Skapa produkt</h2>
+      <ProductForm onSubmit={handleSubmit} />
+    </div>
+  );
 }
 
-export default ProductEdit;
+export default ProductEdit

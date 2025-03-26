@@ -1,28 +1,36 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import ProductEdit from './views/ProductEdit.jsx'
-import Products from './views/Products.jsx'
-import ProductDetail from './views/ProductDetail.jsx'
-import Home from './views/Home.jsx'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+
+// Routing
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+// App & Views
+import App from './App.jsx';
+import Home from './views/Home.jsx';
+import ProductEdit from './views/ProductEdit.jsx';
+import ProductListView from './views/ProductListView.jsx';
+import ProductDetail from './views/ProductDetail.jsx';
+import ShoppingCartView from './views/ShoppingCartView.jsx';
+import NotFound from './components/NotFound.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App />, // Det här är den övergripande "föräldern" som håller allt
     children: [
       { path: '/', element: <Home /> },
-      { path: '/Product/new', element: <ProductEdit /> },
-      { path: '/Products', element: <Products /> },
-      { path: '/ProductDetail', element: <ProductDetail /> }, 
+      { path: '/products', element: <ProductListView /> },
+      { path: '/products/new', element: <ProductEdit /> },
+      { path: '/products/:id', element: <ProductDetail /> },
+      { path: '/cart', element: <ShoppingCartView /> },
+      { path: '*', element: <NotFound /> }, // Hantera alla ogiltiga vägar
     ],
   },
-])
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>
-)
+);
