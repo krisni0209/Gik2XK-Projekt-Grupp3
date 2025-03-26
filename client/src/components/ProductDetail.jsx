@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ProductService from "../services/ProductService";
-
+import ProductRatingForm from "../components/ProductRatingForm";
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);

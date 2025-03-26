@@ -1,8 +1,14 @@
 export default (sequelize, DataTypes) => {
-  return sequelize.define("Product", {
-    title: { type: DataTypes.STRING, allowNull: false },
+  const Product = sequelize.define("Product", {
+    title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    price: { type: DataTypes.DOUBLE, allowNull: false },
+    price: DataTypes.INTEGER,
     imageUrl: DataTypes.STRING,
   });
+
+  Product.associate = (models) => {
+    Product.hasMany(models.Rating, { as: "ratings" });
+  };
+
+  return Product;
 };

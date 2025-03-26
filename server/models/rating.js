@@ -1,26 +1,16 @@
-// Ratings model
-module.exports = (sequelize, DataTypes) => {
-  return sequelize.define(
-    "rating",
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-
-      rating: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          len: [1, 10],
-        },
-      },
+// models/Rating.js
+export default (sequelize, DataTypes) => {
+  const Rating = sequelize.define("Rating", {
+    value: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-    { underscored: true }
-  );
+    comment: DataTypes.TEXT,
+  });
+
+  Rating.associate = (models) => {
+    Rating.belongsTo(models.Product, { foreignKey: "productId" });
+  };
+
+  return Rating;
 };

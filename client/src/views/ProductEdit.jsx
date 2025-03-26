@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ProductService from "../services/ProductService";
+import { getById, create, update } from "../services/ProductService";
 
 function ProductEdit() {
   const { id } = useParams();
@@ -15,9 +15,7 @@ function ProductEdit() {
 
   useEffect(() => {
     if (id) {
-      ProductService.getById(id).then(data => {
-        setProduct(data);
-      });
+      getById(id).then(data => setProduct(data));
     }
   }, [id]);
 
@@ -28,15 +26,16 @@ function ProductEdit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (id) {
-      await ProductService.update(id, product);
+      await update(id, product);
     } else {
-      await ProductService.create(product);
+      await create(product);
     }
     navigate("/products");
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>{id ? "Ändra" : "Skapa"} produkt</h2>
       <input
         name="title"
         value={product.title}
@@ -63,9 +62,10 @@ function ProductEdit() {
         onChange={handleChange}
         placeholder="Bildlänk"
       />
-      <button type="submit">{id ? "Uppdatera" : "Skapa"} produkt</button>
+      <button type="submit">{id ? "Spara ändringar" : "Skapa produkt"}</button>
     </form>
   );
 }
 
 export default ProductEdit;
+
