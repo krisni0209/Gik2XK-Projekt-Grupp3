@@ -1,24 +1,28 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProductById } from "../services/ProductService";
- 
+import ProductService from "../services/ProductService";
+
 function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
- 
+
   useEffect(() => {
-	getProductById(id).then(res => setProduct(res.data));
+    ProductService.getById(id).then(data => setProduct(data));
   }, [id]);
- 
-  if (!product) return <p>Laddar...</p>;
- 
+
+  if (!product) return <p>Laddar produkt...</p>;
+
   return (
-	<div>
-  	<h2>{product.title}</h2>
-  	<p>{product.description}</p>
-  	<p>Pris: {product.price} kr</p>
-	</div>
+    <div>
+      <h2>{product.title}</h2>
+      <p>{product.description}</p>
+      <p>Pris: {product.price} kr</p>
+      {product.imageUrl && (
+        <img src={product.imageUrl} alt={product.title} style={{ width: "200px" }} />
+      )}
+    </div>
   );
 }
- 
+
 export default ProductDetail;
+

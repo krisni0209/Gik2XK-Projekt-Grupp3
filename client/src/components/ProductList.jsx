@@ -1,24 +1,29 @@
-import { useEffect, useState } from "react";
-import { getAllProducts } from "../services/ProductService";
-import ProductItemSmall from "./ProductItemSmall";
- 
+import React, { useEffect, useState } from "react";
+import ProductService from "../services/ProductService";
+
 function ProductList() {
   const [products, setProducts] = useState([]);
- 
+
   useEffect(() => {
-	getAllProducts().then(res => setProducts(res.data));
+    ProductService.getAll().then((data) => {
+      setProducts(data);
+    });
   }, []);
- 
+
   return (
-	<div className="product-list">
-  	{products.map(p => (
-    	<ProductItemSmall key={p.id} product={p} />
-  	))}
-	</div>
+    <div>
+      <h2>Produkter</h2>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            <h3>{product.title}</h3>
+            <p>{product.description}</p>
+            <p>Pris: {product.price} kr</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
- 
+
 export default ProductList;
-
-
-

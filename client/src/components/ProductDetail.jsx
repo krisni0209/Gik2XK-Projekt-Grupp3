@@ -1,26 +1,29 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import UserService from "../services/UserService";
+import ProductService from "../services/ProductService";
 
-function UserDetail() {
+function ProductDetail() {
   const { id } = useParams();
-  const [user, setUser] = useState(null);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    UserService.getById(id).then(setUser);
+    ProductService.getById(id).then(setProduct);
   }, [id]);
 
-  if (!user) return <p>Laddar användare...</p>;
+  if (!product) return <p>Laddar produkt...</p>;
 
   return (
     <div>
-      <h3>{user.first_name} {user.last_name}</h3>
-      <p>Email: {user.email}</p>
+      <h2>{product.title}</h2>
+      <p>{product.description}</p>
+      <p>Pris: {product.price} kr</p>
+      {product.imageUrl && <img src={product.imageUrl} alt={product.title} style={{ width: "200px" }} />}
     </div>
   );
 }
 
-export default UserDetail;
+export default ProductDetail;
+
 
 
 
