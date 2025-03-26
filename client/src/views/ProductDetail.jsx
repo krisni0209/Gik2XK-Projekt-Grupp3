@@ -1,19 +1,24 @@
-import { useParams } from 'react-router-dom';
-import ProductDetail from '../components/ProductDetail';
-
-// Samma mockdata som i ProductListView
-const products = [
-  { id: 1, title: "Klubba", price: 999, imageUrl: "/img/klubba.jpg", description: "Proffsklubba" },
-  { id: 2, title: "Hjälm", price: 799, imageUrl: "/img/hjalm.jpg", description: "Säker hjälm" }
-];
-
-function ProductDetailView() {
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getProductById } from "../services/ProductService";
+ 
+function ProductDetail() {
   const { id } = useParams();
-  const product = products.find(p => p.id === parseInt(id));
-
-  if (!product) return <p>Produkten hittades inte.</p>;
-
-  return <ProductDetail product={product} />;
+  const [product, setProduct] = useState(null);
+ 
+  useEffect(() => {
+	getProductById(id).then(res => setProduct(res.data));
+  }, [id]);
+ 
+  if (!product) return <p>Laddar...</p>;
+ 
+  return (
+	<div>
+  	<h2>{product.title}</h2>
+  	<p>{product.description}</p>
+  	<p>Pris: {product.price} kr</p>
+	</div>
+  );
 }
-
-export default ProductDetailView;
+ 
+export default ProductDetail;

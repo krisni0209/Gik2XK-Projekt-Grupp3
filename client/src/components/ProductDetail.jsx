@@ -1,28 +1,26 @@
-import { useParams } from 'react-router-dom';
-import ProductItemLarge from './ProductItemLarge';
-import Rating from './Rating';
-
-function ProductDetail({ products }) {
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getProductById } from "../services/ProductService";
+ 
+function ProductDetail() {
   const { id } = useParams();
-  const product = products.find(p => p.id === parseInt(id));
-  const handleDelete = (productId) => {
-    fetch(`/api/products/${productId}`, {
-      method: 'DELETE'
-    })
-      .then(res => res.ok && setProducts(products.filter(p => p.id !== productId)))
-      .catch(err => console.error('Kunde inte ta bort:', err));
-  };
-  
-  if (!product) return <p>Produkten hittades inte.</p>;
-
+  const [product, setProduct] = useState(null);
+ 
+  useEffect(() => {
+	getProductById(id).then(res => setProduct(res.data));
+  }, [id]);
+ 
+  if (!product) return <p>Laddar...</p>;
+ 
   return (
-    <>
-      <ProductItemLarge product={product} />
-      <Rating productId={product.id} />
-    </>
+	<div>
+  	<h2>{product.title}</h2>
+  	<p>{product.description}</p>
+  	<p>Pris: {product.price} kr</p>
+	</div>
   );
 }
-
+ 
 export default ProductDetail;
 
 

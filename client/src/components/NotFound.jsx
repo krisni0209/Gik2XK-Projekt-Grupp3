@@ -1,11 +1,10 @@
 function NotFound() {
-    return (
-      <div>
-        <h2>404 – Sidan kunde inte hittas</h2>
-        <p>Kontrollera att URL:en är korrekt.</p>
-      </div>
-    );
-  }
-  
-  export default NotFound;
-  
+  return (
+	<div>
+  	<h2>404 - Sidan hittades inte</h2>
+  	<p>Vänligen kontrollera URL:en eller gå tillbaka till startsidan.</p>
+	</div>
+  );
+}
+ 
+export default NotFound;

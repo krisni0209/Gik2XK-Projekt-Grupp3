@@ -1,62 +1,47 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import ProductForm from '../components/ProductForm';
-
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { createProduct, getProductById, updateProduct } from "../services/ProductService";
+ 
 function ProductEdit() {
-  const { id } = useParams(); // fångar /products/:id/edit
-  const [product, setProduct] = useState(null);
-
-  // ✅ MOCKDATA – ersätt detta med fetch om du vill koppla till backend
+  const { id } = useParams();
+  const navigate = useNavigate();
+ 
+  const [product, setProduct] = useState({
+	title: "",
+	description: "",
+	price: 0,
+	imageUrl: ""
+  });
+ 
   useEffect(() => {
-    const mockProducts = [
-      {
-        id: 1,
-        title: 'Hockeyklubba Bauer Vapor',
-        price: 1299,
-        description: 'Lättviktsklubba för fartfylld spelstil',
-        imageUrl: ''
-      },
-      {
-        id: 2,
-        title: 'Hockeyhjälm CCM',
-        price: 799,
-        description: 'Skyddande hjälm för juniorer',
-        imageUrl: ''
-      }
-    ];
-
-    const foundProduct = mockProducts.find(p => p.id === parseInt(id));
-    setProduct(foundProduct);
+	if (id) {
+  	getProductById(id).then(res => setProduct(res.data));
+	}
   }, [id]);
-
-  // ✅ Om produkten inte hittas eller laddas
-  if (!product) {
-    return <p>Laddar produktdata...</p>;
-  }
-
-  // ✅ Skickas när formuläret sparas
-  const handleSubmit = (updatedProduct) => {
-    console.log('Uppdaterad produkt:', updatedProduct);
-
-    // TODO: Skicka till backend istället för console.log
-    /*
-    fetch(`/api/products/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedProduct)
-    })
-    .then(res => res.json())
-    .then(data => console.log("Uppdaterad i backend:", data));
-    */
+ 
+  const handleChange = (e) => {
+	setProduct({ ...product, [e.target.name]: e.target.value });
   };
-
+ 
+  const handleSubmit = async (e) => {
+	e.preventDefault();
+	if (id) {
+  	await updateProduct(id, product);
+	} else {
+  	await createProduct(product);
+	}
+	navigate("/products");
+  };
+ 
   return (
-    <div>
-      <h2>Redigera produkt</h2>
-      <ProductForm initialProduct={product} onSubmit={handleSubmit} />
-    </div>
+	<form onSubmit={handleSubmit}>
+  	<input name="title" value={product.title} onChange={handleChange} placeholder="Titel" required />
+  	<textarea name="description" value={product.description} onChange={handleChange} placeholder="Beskrivning" />
+  	<input name="price" type="number" value={product.price} onChange={handleChange} placeholder="Pris" />
+  	<input name="imageUrl" value={product.imageUrl} onChange={handleChange} placeholder="Bildlänk" />
+  	<button type="submit">{id ? "Uppdatera" : "Skapa"} produkt</button>
+	</form>
   );
 }
-
+ 
 export default ProductEdit;
-

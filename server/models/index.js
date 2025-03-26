@@ -1,36 +1,32 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
+const { Suspense, lazy } = require("react");
 
-// Routing
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-// App & Views
-import App from "./App.jsx";
-import Home from "./views/Home.jsx";
-import ProductEdit from "./views/ProductEdit.jsx";
-import ProductListView from "./views/ProductListView.jsx";
-import ProductDetail from "./views/ProductDetail.jsx";
-import ShoppingCartView from "./views/ShoppingCartView.jsx";
-import NotFound from "./components/NotFound.jsx";
+// Lazily load components
+const Home = lazy(() => import("./views/Home.jsx"));
+const ProductEdit = lazy(() => import("./views/ProductEdit.jsx"));
+const ProductListView = lazy(() => import("./views/ProductListView.jsx"));
+const ProductDetail = lazy(() => import("./views/ProductDetail.jsx"));
+const ShoppingCartView = lazy(() => import("./views/ShoppingCartView.jsx"));
+const NotFound = lazy(() => import("./components/NotFound.jsx"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, // Root element for all routes
+    element: <App />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/products", element: <ProductListView /> },
       { path: "/products/new", element: <ProductEdit /> },
       { path: "/products/:id", element: <ProductDetail /> },
       { path: "/cart", element: <ShoppingCartView /> },
-      { path: "*", element: <NotFound /> }, // Handle all invalid routes
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <RouterProvider router={router} />
+    </Suspense>
   </StrictMode>
 );

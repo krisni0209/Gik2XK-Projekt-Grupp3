@@ -1,21 +1,35 @@
-import ProductList from '../components/ProductList';
-import { useState } from 'react';
-
+import { useEffect, useState } from "react";
+import { getAllProducts, deleteProduct } from "../services/ProductService";
+import { Link } from "react-router-dom";
+ 
 function ProductListView() {
-  const [products, setProducts] = useState([
-    { id: 1, title: 'Hockeyklubba', price: 999, description: 'Proffsklubba' },
-    { id: 2, title: 'Skydd', price: 599, description: 'Axelskydd junior' },
-    { id: 3, title: 'CCM Hjälm', price: 799, description: 'Skyddande hjälm' }
-  ]);
-
-  const handleDelete = (productId) => {
-    const updatedProducts = products.filter(p => p.id !== productId);
-    setProducts(updatedProducts);
+  const [products, setProducts] = useState([]);
+ 
+  useEffect(() => {
+	getAllProducts().then(res => setProducts(res.data));
+  }, []);
+ 
+  const handleDelete = async (id) => {
+	await deleteProduct(id);
+	setProducts(products.filter(p => p.id !== id));
   };
-
-  return <ProductList products={products} onDelete={handleDelete} />;
+ 
+  return (
+	<div>
+  	<h2>Alla produkter</h2>
+  	<ul>
+    	{products.map(p => (
+      	<li key={p.id}>
+        	<h3>{p.title}</h3>
+        	<p>{p.price} kr</p>
+        	<Link to={`/products/${p.id}`}>Visa</Link>{" | "}
+        	<Link to={`/products/${p.id}/edit`}>Ändra</Link>{" | "}
+        	<button onClick={() => handleDelete(p.id)}>Ta bort</button>
+      	</li>
+    	))}
+  	</ul>
+	</div>
+  );
 }
-
+ 
 export default ProductListView;
-
-

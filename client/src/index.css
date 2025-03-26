@@ -1,2 +1,58 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+  color: #333;
+}
 
-  
+header {
+  background: #222;
+  color: #fff;
+  padding: 1rem;
+}
+
+header ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 2rem;
+}
+
+.product-card,
+.user-card,
+.cart-item {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 1rem 0;
+  background: white;
+}
+
+button {
+  background: #d00;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #b00;
+}
+
+form input,
+form textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
