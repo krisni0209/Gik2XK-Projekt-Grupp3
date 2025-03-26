@@ -1,9 +1,23 @@
 import express from "express";
-import { getAverageRating } from "../services/productService.js";
+import {
+  getAllProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  getAverageRating,
+} from "../services/productService.js";
 
 const router = express.Router();
 
-// GET /api/products/:id/average-rating
+// CRUD routes
+router.get("/", getAllProducts);
+router.get("/:id", getProductById);
+router.post("/", createProduct);
+router.put("/:id", updateProduct);
+router.delete("/:id", deleteProduct);
+
+// Hämta snittbetyg
 router.get("/:id/average-rating", async (req, res) => {
   const { id } = req.params;
   try {

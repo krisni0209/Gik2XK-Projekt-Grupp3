@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
-import ProductService from "../services/ProductService";
 import { getAll } from "../services/ProductService";
-
-
 
 function ProductList() {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     getAll().then((data) => {
-      setProducts(data);
-    });
-  }, []);
-  
-  useEffect(() => {
-    ProductService.getAll().then((data) => {
       setProducts(data);
     });
   }, []);
