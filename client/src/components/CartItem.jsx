@@ -1,17 +1,12 @@
-function CartItem({ item, onRemove }) {
+function CartItem({ item }) {
 	return (
-	  <div className="cart-item" style={{ background: "#fff", padding: "1rem", border: "1px solid #ddd", marginBottom: "1rem" }}>
+	  <div className="cart-item">
 		<h4>{item.title}</h4>
-		<p>Pris: {item.price} kr</p>
 		<p>Antal: {item.quantity}</p>
-		<p>Delsumma: {item.price * item.quantity} kr</p>
-		{onRemove && (
-		  <button onClick={() => onRemove(item.id)}>Ta bort</button>
-		)}
+		<p>Pris: {item.price} kr</p>
 	  </div>
 	);
   }
    
   export default CartItem;
-  
   

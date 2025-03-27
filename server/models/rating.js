@@ -8,10 +8,7 @@ export default (sequelize, DataTypes) => {
   });
 
   Rating.associate = (models) => {
-    Rating.belongsTo(models.Product, {
-      foreignKey: "productId", // 🔧 samma nyckel som ovan
-      as: "product",
-    });
+    Rating.belongsTo(models.Product, { foreignKey: "productId" });
   };
 
   return Rating;

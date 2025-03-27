@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 import { getAll } from "../services/ProductService";
-import ProductItemSmall from "./ProductItemSmall";
  
 function ProductList() {
   const [products, setProducts] = useState([]);
  
   useEffect(() => {
-	getAll().then((data) => {
-  	setProducts(data);
-	});
+	getAll().then(setProducts);
   }, []);
  
   return (
 	<div>
-  	<h2>Produkter</h2>
-  	<div className="product-list">
+ 	 <h2>Produkter</h2>
+  	<ul>
     	{products.map((product) => (
-      	<ProductItemSmall key={product.id} product={product} />
+      	<li key={product.id}>
+        	<h3>{product.title}</h3>
+        	<p>{product.description}</p>
+        	<p>Pris: {product.price} kr</p>
+      	</li>
     	))}
-  	</div>
+  	</ul>
 	</div>
   );
 }

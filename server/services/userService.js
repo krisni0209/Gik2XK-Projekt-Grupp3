@@ -1,38 +1,57 @@
-export async function getAllUsers(req, res) {
-  // dummydata just nu – byt till riktig databas om du har User-modellen
-  res.json([
-    {
-      id: 1,
-      first_name: "Anna",
-      last_name: "Andersson",
-      email: "anna@example.com",
-    },
-    {
-      id: 2,
-      first_name: "Erik",
-      last_name: "Eriksson",
-      email: "erik@example.com",
-    },
-  ]);
-}
+import { User } from "../models/index.js";
 
-export async function getUserById(req, res) {
-  const id = req.params.id;
-  res.json({ id, name: "Demo User" });
-}
+// Dummy / riktiga beroende på DB
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: "Kunde inte hämta användare" });
+  }
+};
 
-export async function createUser(req, res) {
-  const newUser = req.body;
-  res.status(201).json({ message: "User created", user: newUser });
-}
+export const getUserById = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    user
+      ? res.json(user)
+      : res.status(404).json({ message: "Användaren hittades inte." });
+  } catch (err) {
+    res.status(500).json({ error: "Fel vid hämtning av användare." });
+  }
+};
 
-export async function updateUser(req, res) {
-  const id = req.params.id;
-  const updatedUser = req.body;
-  res.json({ message: `User ${id} updated`, user: updatedUser });
-}
+export const createUser = async (req, res) => {
+  try {
+    const newUser = await User.create(req.body);
+    res.status(201).json({ message: "User created", user: newUser });
+  } catch (err) {
+    res.status(400).json({ error: "Fel vid skapande av användare" });
+  }
+};
 
-export async function deleteUser(req, res) {
-  const id = req.params.id;
-  res.status(204).send(); // No content
-}
+export const updateUser = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user)
+      return res.status(404).json({ message: "Användaren hittades inte." });
+
+    await user.update(req.body);
+    res.json({ message: `User ${req.params.id} updated`, user });
+  } catch (err) {
+    res.status(400).json({ error: "Fel vid uppdatering av användare" });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user)
+      return res.status(404).json({ message: "Användaren hittades inte." });
+
+    await user.destroy();
+    res.status(204).send();
+  } catch (err) {
+    res.status(500).json({ error: "Fel vid borttagning av användare" });
+  }
+};

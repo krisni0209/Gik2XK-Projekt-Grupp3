@@ -4,7 +4,7 @@ function Home() {
   return (
 	<div className="home">
   	<h1>Välkommen till Hockeybutiken 🏒</h1>
-  	<p>Handla och sälj allt inom hockey, nytt och begagnat!</p>
+  	<p>Handla och sälj allt inom hockey!</p>
   	<ProductList />
 	</div>
   );

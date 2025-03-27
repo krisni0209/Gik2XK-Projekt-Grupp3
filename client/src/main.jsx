@@ -1,7 +1,5 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
- 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
  
@@ -12,6 +10,8 @@ import ProductListView from "./views/ProductListView.jsx";
 import ProductDetail from "./views/ProductDetail.jsx";
 import ShoppingCartView from "./views/ShoppingCartView.jsx";
 import NotFound from "./components/NotFound.jsx";
+ 
+import "./index.css";
  
 const router = createBrowserRouter([
   {
@@ -36,4 +36,5 @@ createRoot(document.getElementById("root")).render(
 	</CartProvider>
   </StrictMode>
 );
+
 

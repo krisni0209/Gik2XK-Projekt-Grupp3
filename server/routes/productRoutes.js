@@ -6,16 +6,19 @@ import {
   updateProduct,
   deleteProduct,
   getAverageRating,
+  addRatingToProduct,
 } from "../services/productService.js";
 
 const router = express.Router();
 
+// Produkt-CRUD
 router.get("/", getAllProducts);
 router.get("/:id", getProductById);
 router.post("/", createProduct);
 router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 
+// Betyg
 router.get("/:id/average-rating", async (req, res) => {
   const { id } = req.params;
   try {
@@ -29,5 +32,7 @@ router.get("/:id/average-rating", async (req, res) => {
     res.status(500).json({ error: "Något gick fel." });
   }
 });
+
+router.post("/:id/ratings", addRatingToProduct);
 
 export default router;

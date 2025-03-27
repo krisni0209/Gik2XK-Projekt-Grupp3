@@ -7,10 +7,7 @@ export default (sequelize, DataTypes) => {
   });
 
   Product.associate = (models) => {
-    Product.hasMany(models.Rating, {
-      foreignKey: "productId", // 🔧 detta fixar nyckelstrul
-      as: "ratings",
-    });
+    Product.hasMany(models.Rating, { as: "ratings" });
   };
 
   return Product;

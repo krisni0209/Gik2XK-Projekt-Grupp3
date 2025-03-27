@@ -1,22 +1,19 @@
 import { Sequelize, DataTypes } from "sequelize";
 import ProductModel from "./Product.js";
 import RatingModel from "./Rating.js";
+import UserModel from "./User.js";
 
 const sequelize = new Sequelize({
-  dialect: "sqlite", // eller mysql, beroende på vad du använder
-  storage: "./database.sqlite",
+  dialect: "sqlite",
+  storage: "./database.sqlite", // Eller använd .env för MySQL
 });
 
-const models = {
-  Product: ProductModel(sequelize, DataTypes),
-  Rating: RatingModel(sequelize, DataTypes),
-};
+const Product = ProductModel(sequelize, DataTypes);
+const Rating = RatingModel(sequelize, DataTypes);
+const User = UserModel(sequelize, DataTypes);
 
-// 🔁 Kör associationer
-Object.values(models).forEach((model) => {
-  if (model.associate) model.associate(models);
-});
+Product.associate?.({ Rating });
+Rating.associate?.({ Product });
 
-export const { Product, Rating } = models;
-export { sequelize };
-export default models;
+export { sequelize, Sequelize, Product, Rating, User };
+export default { sequelize, Sequelize, Product, Rating, User };

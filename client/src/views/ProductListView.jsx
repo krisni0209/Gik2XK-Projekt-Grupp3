@@ -12,7 +12,7 @@ function ProductListView() {
   const handleDelete = async (id) => {
 	if (window.confirm("Vill du verkligen ta bort produkten?")) {
   	await deleteProduct(id);
-  	setProducts(products.filter((p) => p.id !== id));
+  	setProducts((prev) => prev.filter((p) => p.id !== id));
 	}
   };
  
@@ -24,12 +24,20 @@ function ProductListView() {
   	</Link>
   	<ul>
     	{products.map((p) => (
-      	<li key={p.id} style={{ background: "#fff", marginBottom: "1rem", padding: "1rem", border: "1px solid #ddd" }}>
+      	<li
+        	key={p.id}
+        	style={{
+          	background: "#fff",
+          	marginBottom: "1rem",
+          	padding: "1rem",
+          	border: "1px solid #ddd",
+        	}}
+      	>
         	<h3>{p.title}</h3>
-        	<p>{p.description}</p>
+            <p>{p.description}</p>
         	<p>Pris: {p.price} kr</p>
-        	<Link to={`/products/${p.id}`}>Visa</Link>{" | "}
-        	<Link to={`/products/${p.id}/edit`}>✏️ Ändra</Link>{" | "}
+        	<Link to={`/products/${p.id}`}>Visa</Link> |{" "}
+        	<Link to={`/products/${p.id}/edit`}>✏️ Ändra</Link> |{" "}
         	<button onClick={() => handleDelete(p.id)}>🗑️ Ta bort</button>
       	</li>
     	))}
@@ -39,3 +47,4 @@ function ProductListView() {
 }
  
 export default ProductListView;
+

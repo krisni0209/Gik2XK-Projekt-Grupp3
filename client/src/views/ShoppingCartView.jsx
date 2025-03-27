@@ -22,7 +22,7 @@ function ShoppingCartView() {
             	background: "#fff",
             	marginBottom: "1rem",
             	padding: "1rem",
-        	    border: "1px solid #ddd",
+            	border: "1px solid #ddd",
           	}}
         	>
           	<h3>{item.title}</h3>
