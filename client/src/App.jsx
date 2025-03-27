@@ -8,7 +8,7 @@ function App() {
       	<ul>
         	<li><Link to="/">Hem</Link></li>
         	<li><Link to="/products">Produkter</Link></li>
-        	<li><Link to="/products/new">Ny produkt</Link></li>
+			<li><Link to="/products/new">Lägg till ny produkt</Link></li>
         	<li><Link to="/cart">Varukorg</Link></li>
       	</ul>
     	</nav>
@@ -18,6 +18,5 @@ function App() {
   	</main>
 	</div>
   );
-}
- 
+} 
 export default App;

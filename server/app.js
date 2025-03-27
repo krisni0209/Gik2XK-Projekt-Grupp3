@@ -1,16 +1,27 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
 
-var app = express();
+import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use("/product", require("./routes/products_Route"));
-app.use("/users", require("./routes/users_Route"));
-app.use("/tags", require("./routes/users_Route"));
+import { sequelize } from "./models/index.js";
 
-module.exports = app;
+dotenv.config();
+
+const app = express(); // ← ← ← VIKTIG RAD!
+
+app.use(cors());
+app.use(bodyParser.json());
+
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Webshop API är igång 🚀");
+});
+
+sequelize.sync(); // Lägg till { force: true } vid behov
+
+export default app;
