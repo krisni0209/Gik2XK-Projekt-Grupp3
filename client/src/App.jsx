@@ -7,7 +7,7 @@ function App() {
     	<nav>
       	<ul>
         	<li><Link to="/">Hem</Link></li>
-    	    <li><Link to="/products">Produkter</Link></li>
+        	<li><Link to="/products">Produkter</Link></li>
         	<li><Link to="/products/new">Ny produkt</Link></li>
         	<li><Link to="/cart">Varukorg</Link></li>
       	</ul>
@@ -21,9 +21,3 @@ function App() {
 }
  
 export default App;
-
-
-
-
-
-

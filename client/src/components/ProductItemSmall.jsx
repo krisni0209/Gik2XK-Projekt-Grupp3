@@ -11,4 +11,3 @@ function ProductItemSmall({ product }) {
 }
  
 export default ProductItemSmall;
-

@@ -10,14 +10,12 @@ import {
 
 const router = express.Router();
 
-// CRUD routes
 router.get("/", getAllProducts);
 router.get("/:id", getProductById);
 router.post("/", createProduct);
 router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 
-// Hämta snittbetyg
 router.get("/:id/average-rating", async (req, res) => {
   const { id } = req.params;
   try {

@@ -1,4 +1,3 @@
-// models/Rating.js
 export default (sequelize, DataTypes) => {
   const Rating = sequelize.define("Rating", {
     value: {
@@ -9,7 +8,10 @@ export default (sequelize, DataTypes) => {
   });
 
   Rating.associate = (models) => {
-    Rating.belongsTo(models.Product, { foreignKey: "productId" });
+    Rating.belongsTo(models.Product, {
+      foreignKey: "productId", // 🔧 samma nyckel som ovan
+      as: "product",
+    });
   };
 
   return Rating;
