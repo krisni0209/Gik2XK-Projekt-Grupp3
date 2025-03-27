@@ -28,6 +28,10 @@ header a {
   text-decoration: none;
   font-weight: bold;
 }
+header a:hover {
+  text-decoration: underline;
+  color: #233d58;
+}
 
 main {
   padding: 6rem;
@@ -85,6 +89,45 @@ main {
 }
 
 .rating {
-  font-size: 1.5rem;
+  font-size: 3rem;
   color: gold;
+}
+button {
+  background: #233d58;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #3e6c9ed0;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-button {
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background-color: #0057b363;
 }

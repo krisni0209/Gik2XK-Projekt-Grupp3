@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { getAll } from "../services/ProductService";
-import Rating from "./Rating";
+import { Link } from "react-router-dom";
+import Rating from "../components/Rating";
+import { useCart } from "../context/CartContext";
 
-function ProductList() {
+function ProductListView() {
   const [products, setProducts] = useState([]);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     getAll().then(setProducts);
@@ -11,9 +14,7 @@ function ProductList() {
 
   return (
     <div>
-      <h2 style={{ marginTop: "3rem", textAlign: "center", paddingRight: "2rem" }}>
-  Produkter
-</h2>
+      <h2 style={{ textAlign: "center", marginBottom: "1rem" }}>Alla produkter</h2>
 
       <div className="product-grid">
         {products.map((product) => {
@@ -26,12 +27,45 @@ function ProductList() {
           return (
             <div key={product.id} className="product-card">
               {product.imageUrl && (
-                <img src={product.imageUrl} alt={product.title} />
+                <Link to={`/products/${product.id}`}>
+                  <img
+                    src={product.imageUrl}
+                    alt={product.title}
+                    style={{
+                      width: "100%",
+                      height: "180px",
+                      objectFit: "cover",
+                      borderRadius: "8px",
+                      marginBottom: "0.5rem",
+                    }}
+                  />
+                </Link>
               )}
-              <h3>{product.title}</h3>
+              <h3>
+                <Link
+                  to={`/products/${product.id}`}
+                  style={{ textDecoration: "none", color: "#222" }}
+                >
+                  {product.title}
+                </Link>
+              </h3>
               <p>{product.description}</p>
               <p><strong>{product.price} kr</strong></p>
               {avg && <Rating value={avg} />}
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: "0.5rem",
+                  justifyContent: "center",
+                  marginTop: "0.5rem",
+                }}
+              >
+                <Link to={`/products/${product.id}`}>
+                  <button>Visa</button>
+                </Link>
+                <button onClick={() => addToCart(product)}>Lägg till 🛒</button>
+              </div>
             </div>
           );
         })}
@@ -40,4 +74,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default ProductListView;

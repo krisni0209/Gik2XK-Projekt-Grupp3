@@ -38,13 +38,7 @@ function ProductRatingForm({ productId, onRatingSubmitted }) {
       	))}
     	</select>
   	</label>
-  	<br />
-  	<textarea
-    	placeholder="Kommentera..."
-    	value={comment}
-    	onChange={(e) => setComment(e.target.value)}
-  	/>
-  	<br />
+
   	<button type="submit">Skicka betyg</button>
 	</form>
   );
