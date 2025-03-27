@@ -42,14 +42,14 @@ function App() {
           >
             <li><Link className="nav-link" to="/">Hem</Link></li>
             <li><Link className="nav-link" to="/cart">Varukorg</Link></li>
-            {isAdmin && <li><Link className="nav-link" to="/admin"> Admin</Link></li>}
+            {isAdmin && <li><Link className="nav-link" to="/admin"> 👤</Link></li>}
           </ul>
 
           <button
             onClick={isAdmin ? logout : () => setShowLogin(true)}
             className="nav-button"
           >
-            {isAdmin ? "Logga ut" : "Logga in som admin"}
+            {isAdmin ? "Logga ut" : "👤"}
           </button>
         </nav>
       </header>
@@ -58,7 +58,7 @@ function App() {
         <Outlet />
       </main>
 
-      {/* 🔐 Inloggningsruta */}
+      {/*  Inloggningsruta */}
       {showLogin && (
         <div
           style={{

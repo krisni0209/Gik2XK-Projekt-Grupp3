@@ -6,7 +6,7 @@ function ProductForm({ product, onChange, onSubmit }) {
   	<input name="price" type="number" value={product.price} onChange={onChange} placeholder="Pris" />
   	<input name="imageUrl" value={product.imageUrl} onChange={onChange} placeholder="Bild-URL" />
   	<button type="submit">Spara</button>
-	</form>
+</form>
   );
 }
  

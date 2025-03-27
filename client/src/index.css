@@ -93,8 +93,8 @@ main {
   color: gold;
 }
 button {
-  background: #233d58;
-  color: white;
+  background: #66c2ffbb;
+  color: rgb(5, 5, 5);
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -103,7 +103,7 @@ button {
 }
 
 button:hover {
-  background: #3e6c9ed0;
+  background: #3e6c9ecc;
 }
 
 .nav-link {
@@ -111,12 +111,12 @@ button:hover {
   text-decoration: none;
   font-weight: bold;
   padding: 0.5rem 1rem;
-  border-radius: 6px;
+  border-radius: 15px;
   transition: background 0.2s ease;
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(219, 202, 202, 0.425);
 }
 
 .nav-button {
@@ -129,5 +129,5 @@ button:hover {
 }
 
 .nav-button:hover {
-  background-color: #0057b363;
+  background-color: #2b7fd34f;
 }
