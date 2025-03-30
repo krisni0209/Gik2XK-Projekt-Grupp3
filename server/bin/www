@@ -15,11 +15,16 @@ sequelize
   .sync()
   .then(() => {
     server.listen(port, () => {
-      console.log(`✅ Servern körs på http://localhost:${port}`);
+      console.log(
+        `✅ Servern körs på http://localhost:${port}`
+      ); /** ✅ detta för att enkelt se om den fungerat */
     });
   })
   .catch((e) => {
-    console.error("❌ Databasanslutning misslyckades:", e);
+    console.error(
+      "❌ Databasanslutning misslyckades:",
+      e
+    ); /** ❌ detta för att se det enkelt om den inte körs */
   });
 
 server.on("error", onError);
